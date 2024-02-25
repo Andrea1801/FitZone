@@ -1,0 +1,12 @@
+:root {
+    --main-bg-color: #0C0C0C;
+
+}
+
+
+body{
+    font-family: "Fredoka", sans-serif;
+    background-color: var(--main-bg-color);
+
+}
+
