@@ -15,7 +15,7 @@ import Footer from '../components/Footer.vue';
                 Obuhvaća snagu, fleksibilnost, izdržljivost i opću zdravstvenu
                 kondiciju. Održavanje tjelesne kondicije može povećati
                 energetske razine, smanjiti rizik od kroničnih bolesti i
-                poboljšati kvalitetu života.
+                poboljšati kvalitetu života!
             </p>
             <button
                 class="btn btn-warning mt-1 col-lg-2 col-md-3 col-sm-3 col-12"
