@@ -1,0 +1,42 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-Cn6dYlP6.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BRhTF9p2.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-mn5naQgy.css"
+    ],
+    "assets": [
+      "assets/logo-DL4eyind.png",
+      "assets/nav_logo-Dji3i_n1.png",
+      "assets/gym-BcsSZXM5.png",
+      "assets/login_back_2-Dt5aiqt_.jpg",
+      "assets/home_cover-CBK7qPPq.jpg"
+    ]
+  },
+  "resources/js/images/gym.png": {
+    "file": "assets/gym-BcsSZXM5.png",
+    "src": "resources/js/images/gym.png"
+  },
+  "resources/js/images/home_cover.jpg": {
+    "file": "assets/home_cover-CBK7qPPq.jpg",
+    "src": "resources/js/images/home_cover.jpg"
+  },
+  "resources/js/images/login_back_2.jpg": {
+    "file": "assets/login_back_2-Dt5aiqt_.jpg",
+    "src": "resources/js/images/login_back_2.jpg"
+  },
+  "resources/js/images/logo.png": {
+    "file": "assets/logo-DL4eyind.png",
+    "src": "resources/js/images/logo.png"
+  },
+  "resources/js/images/nav_logo.png": {
+    "file": "assets/nav_logo-Dji3i_n1.png",
+    "src": "resources/js/images/nav_logo.png"
+  }
+}
