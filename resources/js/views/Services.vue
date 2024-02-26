@@ -7,7 +7,7 @@ import Footer from "../components/Footer.vue";
     <Navbar />
     <div>
         <h1 class="text-center mt-5 text-light">Svi naši treneri</h1>
-        <div class="d-flex gap-3 mt-3 flex-wrap">
+        <div class="d-flex gap-3 mt-3 flex-wrap" style="margin-bottom:100px">
             <div
                 class="card d-flex ms-5 mt-3"
                 v-for="coach in coaches"

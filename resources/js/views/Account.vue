@@ -33,7 +33,7 @@ import axios from "axios";
         </div>
         <h3 class="text-center text-light">Pozdrav {{ data.firstName }}</h3>
         <h5 class="text-center text-light">Ovo su tvoji detalji računa</h5>
-        <div class="container">
+        <div class="container" style="margin-bottom:100px">
             <div
                 class="login-form d-flex justify-content-center align-items-center"
             >

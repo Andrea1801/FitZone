@@ -73,7 +73,7 @@ import { RouterLink, RouterView } from "vue-router";
                         <input
                             class="form-control me-2 searchBar shadow-none"
                             type="search"
-                            placeholder="Search"
+                            placeholder="Pretrazi..."
                             aria-label="Search"
                             v-model="searchText"
                         />
@@ -122,7 +122,7 @@ import { RouterLink, RouterView } from "vue-router";
                                         class="dropdown-item"
                                         href="#"
                                     >
-                                        Logout
+                                        Odjava
                                     </a>
                                 </li>
                             </ul>

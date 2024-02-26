@@ -6,6 +6,15 @@ import Modal from "../../components/Modal.vue";
 
 <template>
     <Navbar />
+    <div class="container d-flex justify-content-center">
+        <div
+            v-if="spinner"
+            class="spinner-border text-warning position-absolute top-50"
+            role="status"
+        >
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <div
         v-if="data.role === 'administrator'"
         class="position-absoulte start-0 top-0"
@@ -29,7 +38,8 @@ import Modal from "../../components/Modal.vue";
             </svg>
         </div>
     </div>
-    <div>
+    <div v-if="data.role === 'administrator'">
+        <div>
         <button
             class="btn float-end mt-3 me-3 btn-warning"
             data-bs-toggle="modal"
@@ -177,6 +187,10 @@ import Modal from "../../components/Modal.vue";
             </table>
         </div>
     </div>
+    </div>
+    <div class="mt-5 d-flex justify-content-center" v-else>
+        <div v-if="!spinner" class="alert alert-warning text-dark text-center col-12 col-lg-4 col-md-5 col-sm-5" style="background-color: #ffba00;">Nemate pristupa ovoj stranici!</div>
+    </div>
     <Modal />
     <Footer />
 </template>
@@ -196,7 +210,8 @@ export default {
             csrfToken: "",
             trainings: [],
             users: [],
-            data:[]
+            data:[],
+            spinner:true
         };
     },
     mounted() {
@@ -295,6 +310,8 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                }).finally(() => {
+                    this.spinner = false;
                 });
         },
     },

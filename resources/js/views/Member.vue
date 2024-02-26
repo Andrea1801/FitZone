@@ -45,7 +45,7 @@ import Footer from "../components/Footer.vue";
         <div v-if="!spinner">
             <h1 class="text-light text-center mt-3">Učlani se</h1>
             <div class="container-fluid mt-3">
-                <div class="container">
+                <div class="container" style="margin-bottom: 100px;">
                     <div
                         class="login-form d-flex justify-content-center align-items-center"
 
