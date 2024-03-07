@@ -17,18 +17,17 @@ import Footer from '../components/Footer.vue';
                 energetske razine, smanjiti rizik od kroničnih bolesti i
                 poboljšati kvalitetu života!
             </p>
-            <button
-                class="btn btn-warning mt-1 col-lg-2 col-md-3 col-sm-3 col-12"
-            >
-                Kreni
-            </button>
+            <a href="http://127.0.0.1:8000/"  class="btn btn-warning mt-1 col-lg-2 col-md-3 col-sm-3 col-12 text-">Kreni</a>
+
+
             <div
                 class="d-flex justify-content-between col-12 col-xl-3 col-lg-5 mt-3 gym-items"
             >
                 <div>
                     <h1 class="text-warning">4k</h1>
-                    <p class="text-warning">Klijenata</p>
+                    <p class="text-warning " >Klijenata</p>
                 </div>
+                <br>
                 <div>
                     <h1 class="text-warning">3.4k+</h1>
                     <p class="text-warning">Zadovoljnih klijenata</p>
@@ -63,7 +62,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 0;
-    pointer-events: none;
+   
 }
 
 .info::after {
@@ -87,7 +86,9 @@ export default {
 .animateText {
     animation: fadeInText 2s forwards infinite;
 }
-
+.text-warning{
+    text-align:center;
+}
 @keyframes fadeInText {
     from {
         opacity: 0;
