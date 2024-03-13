@@ -162,11 +162,12 @@ import Modal from "../../components/Modal.vue";
             </table>
         </div>
     </div>
-    </div>  
+    </div>
     <div class="mt-5 d-flex justify-content-center" v-else>
         <div v-if="!spinner" class="alert alert-warning text-dark text-center col-12 col-lg-4 col-md-5 col-sm-5" style="background-color: #ffba00;">Nemate pristupa ovoj stranici!</div>
     </div>
-    
+
+
     <Modal />
     <Footer />
 </template>
@@ -178,7 +179,8 @@ export default {
         return {
             users: [],
             data: [],
-            spinner: true
+            spinner: true,
+            isLoggedIn:false,
         };
     },
     created() {
@@ -195,7 +197,7 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                }) 
+                })
         },
         deleteUser(id) {
             axios
@@ -224,7 +226,12 @@ export default {
             axios
                 .get("/getUserData")
                 .then((response) => {
-                    this.data = response.data;
+                    this.data = response.data.user;
+                    if(this.data === null){
+                        this.isLoggedIn = false
+                    }else{
+                        this.isLoggedIn = true;
+                    }
                     console.log(this.data.role);
                 })
                 .catch((error) => {

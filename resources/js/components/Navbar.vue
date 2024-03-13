@@ -73,7 +73,7 @@ import { RouterLink, RouterView } from "vue-router";
                         <input
                             class="form-control me-2 searchBar shadow-none"
                             type="search"
-                            placeholder="Pretrazi..."
+                            placeholder="Search"
                             aria-label="Search"
                             v-model="searchText"
                         />
@@ -102,7 +102,7 @@ import { RouterLink, RouterView } from "vue-router";
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                {{ loggedInUser.firstName }}
+                                {{ data.firstName }}
                             </a>
                             <ul
                                 class="dropdown-menu dropdown-menu-end"
@@ -145,44 +145,23 @@ export default {
         return {
             isLoggedIn: false,
             searchText: "",
+            data:[],
         };
     },
 
-    computed: {
-        ...mapState(["loginMessage"]),
-        ...mapGetters(["loggedInUser"]),
-        isLoggedIn() {
-            return this.loggedInUser !== null;
-        },
-    },
+
     created() {
-        if (this.loginMessage) {
-            setTimeout(() => {
-                this.$store.commit("setLoginMessage", "");
-            }, 2000);
-        }
+        this.getData();
     },
     methods: {
-        checkLoginStatus() {
-            axios
-                .get("/isLogged")
-                .then((response) => {
-                    this.loggedInUser = response.data;
 
-                    this.isLoggedIn = true;
-                    console.log(this.isLoggedIn);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
         logout() {
             axios
                 .post("/logout")
                 .then((response) => {
                     this.isLoggedIn = false;
-                    this.loggedInUser = null;
-                    this.$store.dispatch("logout");
+
+
                     this.$router.push("/");
                 })
                 .catch((error) => {
@@ -205,6 +184,24 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                });
+        },
+        getData() {
+            axios
+                .get("/getUserData")
+                .then((response) => {
+                    this.data = response.data.user;
+                    if(this.data == null){
+                        this.isLoggedIn = false;
+                    }else{
+                        this.isLoggedIn = true;
+                    }
+                    console.log("Prijavljen je", this.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                }).finally(() => {
+                    this.spinner = false;
                 });
         },
     },

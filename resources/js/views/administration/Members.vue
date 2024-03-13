@@ -158,7 +158,7 @@ export default {
             axios
                 .get("/getUserData")
                 .then((response) => {
-                    this.data = response.data;
+                    this.data = response.data.user;
                     console.log(this.data.role);
                 })
                 .catch((error) => {

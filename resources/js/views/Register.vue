@@ -126,6 +126,9 @@ export default{
                 .then((response) => {
                     this.message  = response.data.message;
                     this.successMessage = true;
+                    setTimeout(() => {
+                        this.successMessage = false; 
+                    }, 2000);
                     this.user= {
                         firstName: "",
                         lastName: "",

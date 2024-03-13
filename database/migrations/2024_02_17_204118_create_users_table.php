@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('firstName');
             $table->string('lastName');
-            $table->string('email');
+            $table->string('email')->unique('email');
             $table->string('password');
             $table->string('role');
             $table->timestamps();

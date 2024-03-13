@@ -16,7 +16,7 @@ class UserController extends Controller
         $data = $request -> validate([
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required'
         ],
         [
@@ -24,6 +24,7 @@ class UserController extends Controller
             'lastName.required' => 'Prezime je obavezno',
             'email.required' => 'Email je obavezan',
             'email.email' => 'Email nije validan',
+            'email.unique' => 'Postoji korisnik sa ovom email adresom',
             'password.required' => 'Lozinka je obavezna'
         ]
         );
@@ -77,7 +78,7 @@ class UserController extends Controller
 
     public function getUserData(){
         $user = Auth::user();
-        return response()->json($user);
+        return response()->json(['user' => $user]);
     }
 
     public function getUsers(){

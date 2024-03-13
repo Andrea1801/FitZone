@@ -17,7 +17,7 @@ import Footer from '../components/Footer.vue';
                 energetske razine, smanjiti rizik od kroničnih bolesti i
                 poboljšati kvalitetu života!
             </p>
-            <a href="http://127.0.0.1:8000/"  class="btn btn-warning mt-1 col-lg-2 col-md-3 col-sm-3 col-12 text-">Kreni</a>
+            <a href="/"  class="btn btn-warning mt-1 col-lg-2 col-md-3 col-sm-3 col-12 text-">Kreni</a>
 
 
             <div
@@ -62,7 +62,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 0;
-   
+
 }
 
 .info::after {

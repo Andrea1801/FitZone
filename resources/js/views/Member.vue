@@ -20,17 +20,7 @@ import Footer from "../components/Footer.vue";
         Već ste učlanjeni!
     </div>
 
-    <div v-if="!isLoggedIn">
-        <div class="container d-flex justify-content-center">
-            <div>
-                <div class="alert alert-dark mt-5 infoMessage">
-                    Prijavite se kako bi mogli da se uclanite!
-                    <router-link  to="/">Prijava</router-link>
-                </div>
 
-            </div>
-        </div>
-    </div>
 
     <div class="container d-flex justify-content-center">
         <div
@@ -45,7 +35,7 @@ import Footer from "../components/Footer.vue";
         <div v-if="!spinner">
             <h1 class="text-light text-center mt-3">Učlani se</h1>
             <div class="container-fluid mt-3">
-                <div class="container" style="margin-bottom: 100px;">
+                <div class="container">
                     <div
                         class="login-form d-flex justify-content-center align-items-center"
 
@@ -129,14 +119,24 @@ import Footer from "../components/Footer.vue";
             </div>
         </div>
     </div>
+    <div v-if="warning">
+        <div class="container d-flex justify-content-center">
+            <div>
+                <div v-if="!spinner"  class="alert alert-dark mt-5 infoMessage">
+                    Prijavite se kako bi mogli da se uclanite!
+                    <router-link  to="/">Prijava</router-link>
+                </div>
 
+            </div>
+        </div>
+    </div>
     <Footer />
 </template>
 
 <script>
-import { mapState } from "vuex";
+
 import axios from "axios";
-import { mapGetters } from "vuex";
+
 
 export default {
     data() {
@@ -150,25 +150,21 @@ export default {
             users: [],
             trainings: [],
             coaches: [],
-            spinner: false,
+            spinner: true,
             csrfToken: "",
             message: "",
             succesMember: false,
             failedMember: false,
             isLoggedIn: false,
+            warning:false,
         };
     },
-    computed: {
-        ...mapState(["loginMessage"]),
-        ...mapGetters(["loggedInUser"]),
-        isLoggedIn() {
-            return this.loggedInUser !== null;
-        },
-    },
+
     created() {
         this.getUser();
         this.getCoaches();
         this.getTraining();
+        this.getData();
     },
     mounted() {
         this.fetchCsrfToken();
@@ -246,6 +242,26 @@ export default {
                     console.log(error);
                 })
                 .finally(() => {
+                    this.spinner = false;
+                });
+        },
+        getData() {
+            this.spinner = true;
+            axios
+                .get("/getUserData")
+                .then((response) => {
+                    this.data = response.data.user;
+                    if(this.data === null){
+                        this.isLoggedIn = false;
+                        this.warning= true;
+                    }else{
+                        this.isLoggedIn = true;
+                    }
+                    console.log("Prijavljen je", this.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                }).finally(() => {
                     this.spinner = false;
                 });
         },

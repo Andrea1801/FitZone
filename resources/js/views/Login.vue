@@ -109,14 +109,7 @@ export default {
 
                     this.successLogin = true;
                     if (this.logMessage == "Uspjesna prijava") {
-                        this.$store.dispatch(
-                            "setLoginMessage",
-                            this.logMessage
-                        );
-                        this.$store.commit(
-                            "setLoggedInUser",
-                            response.data.user
-                        );
+
                         this.successLogin = true;
                         this.falseLogin = false;
                         this.$router.push("/home");

@@ -7,7 +7,19 @@ import axios from "axios";
 
 <template>
     <Navbar />
-    <div>
+    <div class="container d-flex justify-content-center">
+        <div
+            v-if="spinner"
+            class="spinner-border text-warning position-absolute top-50"
+            role="status"
+        >
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div class="mt-5 d-flex justify-content-center" v-if="data.role != 'administrator' && data.role != 'korisnik'">
+        <div   v-if="!spinner"  class="alert alert-warning text-dark text-center col-12 col-lg-4 col-md-5 col-sm-5" style="background-color: #ffba00;">Nemate pristupa ovoj stranici!</div>
+    </div>
+    <div class="mt-5" v-else>
         <div
             v-if="data.role === 'administrator'"
             class="position-absoulte start-0 top-0"
@@ -33,78 +45,82 @@ import axios from "axios";
         </div>
         <h3 class="text-center text-light">Pozdrav {{ data.firstName }}</h3>
         <h5 class="text-center text-light">Ovo su tvoji detalji računa</h5>
-        <div class="container" style="margin-bottom:100px">
+        <div class="container" style="margin-bottom: 100px">
             <div
-                class="login-form d-flex justify-content-center align-items-center"
+                class="login-form d-flex justify-content-center align-items-center p-3"
             >
                 <form
                     class="col-12 col-sm-12 col-md-10 col-lg-7 mt-1 rounded-3 shadow-sm login-form-details"
                 >
-                    <div class=" d-flex justify-content-center accImg">
+                    <div class="d-flex justify-content-center accImg">
                         <img src="../images/logo.png" alt="" />
                     </div>
-                    <div class="mb-2">
-                        <label for="floatingInput" class="text-light">Ime</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"
+                            >Ime</span
+                        >
                         <input
                             type="text"
                             class="form-control"
-                            id="floatingInput"
-                            placeholder="ime"
                             :value="data.firstName"
-                            disabled
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            :disabled="true"
                         />
-
                     </div>
-                    <label for="floatingInput" class="text-light">Prezime</label>
-                    <div class="mb-2">
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"
+                            >Prezime</span
+                        >
                         <input
                             type="text"
                             class="form-control"
-                            id="floatingInput"
-                            placeholder="prezime"
                             :value="data.lastName"
-                            disabled
-                        />
-
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="floatingInput" class="text-light">Email</label>
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="floatingInput"
-                            placeholder="name@example.com"
-                            :value="data.email"
-                            disabled
-                        />
-
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="floatingPassword" class="text-light"
-                            >Lozinka</label
-                        >
-                        <input
-                            type="password"
-                            class="form-control"
-                            id="floatingPassword"
-                            placeholder="Password"
-                            value="********"
-                            disabled
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            :disabled="true"
                         />
                     </div>
-                    <div>
-                        <label for="floatingPassword" class="text-light"
-                            >Uloga</label
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"
+                            >Email</span
                         >
                         <input
                             type="text"
                             class="form-control"
-                            id="floatingPassword"
-                            placeholder="role"
+                            :value="data.email"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            :disabled="true"
+                        />
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"
+                            >Lozinka</span
+                        >
+                        <input
+                            type="text"
+                            class="form-control"
+                            :value="data.password"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"
+                            >Uloga</span
+                        >
+                        <input
+                            type="text"
+                            class="form-control"
                             :value="data.role"
-                            disabled
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            :disabled="true"
                         />
                     </div>
                 </form>
@@ -120,6 +136,7 @@ export default {
     data() {
         return {
             data: [],
+            spinner: true,
         };
     },
     created() {
@@ -130,11 +147,13 @@ export default {
             axios
                 .get("/getUserData")
                 .then((response) => {
-                    this.data = response.data;
+                    this.data = response.data.user;
                     console.log(this.data.role);
                 })
                 .catch((error) => {
                     console.log(error);
+                }).finally(() => {
+                    this.spinner = false;
                 });
         },
     },
